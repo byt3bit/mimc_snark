@@ -1,6 +1,6 @@
 #include "variable.hpp"
 #include "sbox_snark.hpp"
-#include "ntl_header.hpp"
+#include "common/ntl_header.hpp"
 #include "lowmc_snark.hpp"
 #include "mimc_snark.hpp"
 #include <chrono>
