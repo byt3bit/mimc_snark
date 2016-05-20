@@ -51,7 +51,7 @@ void profile_lowmc_snark(int numofsbox, int numofround, std::vector<NTL::GF2> x,
   std::chrono::duration<double, std::milli> time_fp_ms_witness = time_end-time_end1;
   
 
-  printf("LowMC profile \n\n");
+  printf("\nLowMC profile: \n\n");
   g_lowmc_snark.print_param();
   printf("\n\n");
 

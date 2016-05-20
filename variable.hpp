@@ -1,7 +1,7 @@
 #ifndef VARIABLE_HPP_
 #define VARIABLE_HPP_
-#include "common.hpp"
-#include "utility.hpp"
+#include "common/common.hpp"
+#include "common/utility.hpp"
 
 namespace snark {
 

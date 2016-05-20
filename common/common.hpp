@@ -16,7 +16,7 @@
 #include <type_traits>      /* used for type checking in tamplate function*/
 
 
-
+#define RED  "\x1b[31m"
 #define BOLD "\e[1m"
 #define CYAN "\e[96m" //light cyan
 #define RESET "\033[0m"

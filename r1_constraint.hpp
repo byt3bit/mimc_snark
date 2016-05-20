@@ -2,7 +2,7 @@
 #define MIMC_SNARKBOARD_HPP_
 
 #include "variable.hpp"
-#include "common.hpp"
+#include "common/common.hpp"
 
 namespace snark {
 

@@ -1,7 +1,7 @@
 #ifndef LOWMC_ROUND_SNARK_HPP
 #define LOWMC_ROUND_SNARK_HPP
-#include "common.hpp"
-#include "utility.hpp"
+#include "common/common.hpp"
+#include "common/utility.hpp"
 
 #include "lowmc_header.hpp"
 /*

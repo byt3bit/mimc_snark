@@ -1,6 +1,6 @@
 #ifndef MIMC_SNARK_HPP
 #define MIMC_SNARK_HPP
-#include "common.hpp"
+#include "common/common.hpp"
 #include "r1_constraint.hpp"
 #include "variable.hpp"
 
@@ -21,8 +21,6 @@ namespace snark{
     std::vector<field_t> roundConst;
     //field_t key;          /*for hashing key = 0*/
     snarkcs<field_t> mimc_constr_wit;
-
-    
 
   public:
    
