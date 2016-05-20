@@ -3,16 +3,12 @@
 #include "common.hpp"
 #include "utility.hpp"
 
+#include "lowmc_header.hpp"
 /*
   XOR constraints: Not a proper bilinear gate in the r1_constraint
                    xor constraints are not stored  
 */
 
-#define LOWMC_BLOCK_SIZE 1025
-// #define NUMOF_SBOX 20 
-//#define NUM_OF_ROUND 55
-//#define CHECK_LOGIC
-typedef std::vector<std::bitset<LOWMC_BLOCK_SIZE> > Lmat;
 
 namespace snark {
 
