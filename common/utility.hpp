@@ -7,7 +7,6 @@
 
 
 #define BLOCK_MSGE(s) std::clog<<s
-#define DONE() printf("done\n")
 
 namespace snark {
 
