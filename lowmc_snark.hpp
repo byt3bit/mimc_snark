@@ -1,5 +1,5 @@
-#ifndef LOWMC_ROUND_SNARK_HPP
-#define LOWMC_ROUND_SNARK_HPP
+#ifndef LOWMC_SNARK_HPP
+#define LOWMC_SNARK_HPP
 #include "common/common.hpp"
 #include "common/utility.hpp"
 

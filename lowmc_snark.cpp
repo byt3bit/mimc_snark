@@ -1,5 +1,5 @@
-#ifndef LOWMC_ROUND_SNARK_CPP
-#define LOWMC_ROUND_SNARK_CPP
+#ifndef LOWMC_SNARK_CPP
+#define LOWMC_SNARK_CPP
 
 
 Lmat generate_random_matrix() 
