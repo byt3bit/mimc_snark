@@ -3,12 +3,16 @@
 #include "common/ntl_header.hpp"
 #include "lowmc_snark.hpp"
 #include "mimc_snark.hpp"
+#include "keccak_snark.hpp"
 #include <chrono>
 
 void profile_lowmc_snark(int numofsbox, int numofround, std::vector<NTL::GF2> x, 
 			 std::vector<Lmat> lowmc_mat, Lmat round_const);
 
 void profile_mimc_snark(int field_size);
+
+
+void profile_keccak_snark(int numofround, std::vector<NTL::GF2> x);
 
 int main() 
 {
@@ -17,18 +21,57 @@ int main()
 
   for(int i = 0; i < LOWMC_BLOCK_SIZE;i++) x.push_back(NTL::random_GF2());
 
-  std::vector<Lmat> lowmc_mat = snark::generate_random_matrices(16);
+  // std::vector<Lmat> lowmc_mat = snark::generate_random_matrices(16);
 
-  Lmat round_const = snark::generate_round_const(16);
+  // Lmat round_const = snark::generate_round_const(16);
 
-  //profile_lowmc_snark(20, 55, x, lowmc_mat, round_const);
+  // //profile_lowmc_snark(20, 55, x, lowmc_mat, round_const);
 
-  profile_lowmc_snark(196, 16, x, lowmc_mat, round_const);
+  // profile_lowmc_snark(196, 16, x, lowmc_mat, round_const);
 
-  profile_mimc_snark(1025);
+  // profile_mimc_snark(1025);
 
-  return 0;
+  std::vector<NTL::GF2> y;
+  for(int i = 0;i < KECCAK_BLOCK_SIZE;i++) y.emplace_back(NTL::random_GF2()); 
+
+  profile_keccak_snark(24, y);
+
 }
+
+
+void profile_keccak_snark(int numofround, std::vector<NTL::GF2> x) {
+
+
+  auto time_start = std::chrono::high_resolution_clock::now();
+  
+  snark::keccak_snark<NTL::GF2> ksnark(numofround);
+
+  ksnark.generate_r1_constraint();
+
+  auto time_end1 = std::chrono::high_resolution_clock::now();
+
+  ksnark.generate_witness(x);
+
+  auto time_end = std::chrono::high_resolution_clock::now();
+
+  std::chrono::duration<double, std::milli> time_fp_ms_constr = time_end1-time_start;
+
+  std::chrono::duration<double, std::milli> time_fp_ms_witness = time_end-time_end1;
+  
+
+  //std::cout<<"number of constraints = "<<ksnark.num_constraint()<<std::endl;
+
+
+  printf("time taken to generate constraint = %f milliseconds\n", time_fp_ms_constr.count());
+  printf("time taken to generate witness = %f milliseconds\n\n", time_fp_ms_witness.count());
+
+
+  printf("Total number of multiplications = %d\n\n", ksnark.num_of_mult() );  
+
+  printf("Total number of rank-1 constraints = %lu\n\n", ksnark.num_constraint());
+
+}
+
 
 
 void profile_lowmc_snark(int numofsbox, int numofround, std::vector<NTL::GF2> x, 
@@ -76,10 +119,9 @@ void profile_mimc_snark(int field_size) {
   int nround = (int) (field_size/log2(3.0));
 
   NTL::GF2E z = NTL::random_GF2E();  /*random input*/
-  //printf("rounds = %d\n", nround);
 
   snark::generate_mimc_roundconst(round_const, field_size, nround);
-  //std::cout<<"size = "<<round_const.size()<<std::endl;
+  
   assert(round_const.size() == nround);
 
   auto time_start = std::chrono::high_resolution_clock::now();
